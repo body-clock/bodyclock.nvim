@@ -20,6 +20,8 @@ return {
 			set.lua_ls.setup {}
 			set.ruby_lsp.setup {}
 			set.rubocop.setup {}
+			set.marksman.setup {}
+			set.ts_ls.setup {}
 		end,
 	}
 }
