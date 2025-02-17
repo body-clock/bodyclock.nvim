@@ -17,12 +17,11 @@ return {
 		},
 		config = function()
 			local set = require("lspconfig")
-			set.lua_ls.setup {}
-			set.ruby_lsp.setup {}
-			set.rubocop.setup {}
-			set.marksman.setup {}
-			set.ts_ls.setup {}
+			set.lua_ls.setup({})
+			set.ruby_lsp.setup({})
+			set.rubocop.setup({})
+			set.marksman.setup({})
+			set.ts_ls.setup({})
 		end,
-	}
+	},
 }
-

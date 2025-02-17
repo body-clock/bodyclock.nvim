@@ -1,4 +1,4 @@
 return {
 	"tpope/vim-endwise",
-	enabled = false
+	enabled = false,
 }

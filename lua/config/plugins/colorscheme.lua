@@ -6,27 +6,27 @@ return {
 		priority = 1000,
 		opts = {},
 		config = function()
-			vim.cmd.colorscheme "solarized-osaka"
-		end
+			vim.cmd.colorscheme("solarized-osaka")
+		end,
 	},
 	{
 		"rose-pine/neovim",
 		enabled = false,
 		name = "rose-pine",
 		config = function()
-			require("rose-pine").setup {
+			require("rose-pine").setup({
 				variant = "main",
-			}
-			vim.cmd.colorscheme "rose-pine"
-		end
+			})
+			vim.cmd.colorscheme("rose-pine")
+		end,
 	},
 	{
 		"ellisonleao/gruvbox.nvim",
-		priority = 1000 ,
+		priority = 1000,
 		opts = ...,
 		config = function()
-			vim.cmd.colorscheme "gruvbox"
-		end
+			vim.cmd.colorscheme("gruvbox")
+		end,
 	},
 	{
 		"folke/tokyonight.nvim",
@@ -35,7 +35,7 @@ return {
 		priority = 1000,
 		opts = {},
 		config = function()
-			vim.cmd.colorscheme "tokyonight"
-		end
-	}
+			vim.cmd.colorscheme("tokyonight")
+		end,
+	},
 }
