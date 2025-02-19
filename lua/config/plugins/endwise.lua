@@ -1,4 +1,3 @@
 return {
-	"tpope/vim-endwise",
-	enabled = false,
+	"RRethy/nvim-treesitter-endwise",
 }
