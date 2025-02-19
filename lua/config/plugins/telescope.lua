@@ -4,7 +4,7 @@ return {
 	dependencies = { "nvim-lua/plenary.nvim" },
 	config = function()
 		require("telescope").setup({
-			defaults = require('telescope.themes').get_ivy(),
+			defaults = require("telescope.themes").get_ivy(),
 		})
-	end
+	end,
 }
