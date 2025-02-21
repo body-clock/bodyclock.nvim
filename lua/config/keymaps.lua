@@ -6,6 +6,9 @@ vim.keymap.set("v", "<space>x", ":lua<CR>", { desc = "Source visual selection" }
 -- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear highlight on search" })
 
+-- Open Oil
+vim.keymap.set("n", "-", require("oil").open, { desc = "Open oil file browser" })
+
 -- Telescope mappings
 vim.keymap.set("n", "<leader>sf", function()
 	require("telescope.builtin").find_files()
@@ -22,6 +25,9 @@ end, { desc = "Find Help tags" })
 vim.keymap.set("n", "<leader>sm", function()
 	require("telescope.builtin").marks()
 end, { desc = "Find Marks" })
+vim.keymap.set("n", "<leader>sc", function()
+	require("telescope.builtin").colorscheme()
+end, { desc = "Find colorschemes" })
 
 -- LSP (Some telescope)
 vim.keymap.set("n", "gd", function()
