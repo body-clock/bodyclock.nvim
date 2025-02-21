@@ -1,10 +1,10 @@
 -- Execute current line, useful for testing out keybinds and other settings
-vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>")
-vim.keymap.set("n", "<space>x", ":.lua<CR>")
-vim.keymap.set("v", "<space>x", ":lua<CR>")
+vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>", { desc = "Source current file" })
+vim.keymap.set("n", "<space>x", ":.lua<CR>", { desc = "Source current line" })
+vim.keymap.set("v", "<space>x", ":lua<CR>", { desc = "Source visual selection" })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear highlight on search" })
 
 -- Telescope mappings
 vim.keymap.set("n", "<leader>sf", function()
@@ -30,8 +30,8 @@ end, { desc = "[g]o to [d]efinition" })
 vim.keymap.set("n", "gr", function()
 	require("telescope.builtin").lsp_references()
 end, { desc = "[g]o to [r]eference" })
-vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
-vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
+vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover LSP information" })
 
 -- Quickfix list
 vim.keymap.set("n", "<leader>co", ":copen<CR>", { desc = "Open Quickfix list" })
@@ -68,27 +68,27 @@ vim.keymap.set("n", "<leader>lg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
 local harpoon = require("harpoon")
 vim.keymap.set("n", "<leader>a", function()
 	harpoon:list():add()
-end)
+end, { desc = "Add current file to Harpoon" })
 vim.keymap.set("n", "<leader>h", function()
 	harpoon.ui:toggle_quick_menu(harpoon:list())
-end)
+end, { desc = "Toggle Harpoon quick menu" })
 vim.keymap.set("n", "<leader>1", function()
 	harpoon:list():select(1)
-end)
+end, { desc = "Select Harpoon 1" })
 vim.keymap.set("n", "<leader>2", function()
 	harpoon:list():select(2)
-end)
+end, { desc = "Select Harpoon 2" })
 vim.keymap.set("n", "<leader>3", function()
 	harpoon:list():select(3)
-end)
+end, { desc = "Select Harpoon 3" })
 vim.keymap.set("n", "<leader>4", function()
 	harpoon:list():select(4)
-end)
+end, { desc = "Select Harpoon 4" })
 
 -- Format
 vim.keymap.set("n", "<leader>f", function()
 	require("conform").format({ async = true, lsp_format = "fallback" })
-end)
+end, { desc = "Format current file" })
 
 -- Smoother window movement
 --  See `:help wincmd` for a list of all window commands
