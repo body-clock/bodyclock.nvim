@@ -5,6 +5,11 @@ return {
 	config = function()
 		require("telescope").setup({
 			defaults = require("telescope.themes").get_ivy(),
+			pickers = {
+				colorscheme = {
+					enable_preview = true,
+				},
+			},
 		})
 	end,
 }
