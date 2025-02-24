@@ -103,6 +103,13 @@ vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right win
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
+-- Vim/Tmux Navigation
+vim.keymap.set("n", "<c-h>", "<cmd>TmuxNavigateLeft<cr>", { desc = "Move left tmux pane" })
+vim.keymap.set("n", "<c-j>", "<cmd>TmuxNavigateDown<cr>", { desc = "Move down tmux pane" })
+vim.keymap.set("n", "<c-k>", "<cmd>TmuxNavigateUp<cr>", { desc = "Move up tmux pane" })
+vim.keymap.set("n", "<c-l>", "<cmd>TmuxNavigateRight<cr>", { desc = "Move right tmux pane" })
+vim.keymap.set("n", "<c-\\>", "<cmd>TmuxNavigatePrevious<cr>", { desc = "Move to previous tmux pane" })
+
 -- Center cursor in screen when page navigating
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Move up by half a page and center" })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Move down by half a page and center" })
