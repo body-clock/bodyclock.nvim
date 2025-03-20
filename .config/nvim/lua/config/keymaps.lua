@@ -94,6 +94,12 @@ end, { desc = "Select Harpoon 3" })
 vim.keymap.set("n", "<leader>4", function()
 	harpoon:list():select(4)
 end, { desc = "Select Harpoon 4" })
+vim.keymap.set("n", "<leader>n", function()
+	harpoon:list():next()
+end, { desc = "Next harpoon" })
+vim.keymap.set("n", "<leader>p", function()
+	harpoon:list():prev()
+end, { desc = "Previous harpoon" })
 
 -- Format
 vim.keymap.set("n", "<leader>f", function()
