@@ -27,6 +27,7 @@ return {
 			local function main()
 				vim.o.termguicolors = true
 				vim.g.tinted_colorspace = 256
+				vim.g.tinted_background_transparent = 1
 				local current_theme_name = get_tinty_theme()
 
 				vim.cmd("colorscheme " .. current_theme_name)
