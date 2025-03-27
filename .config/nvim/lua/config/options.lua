@@ -18,4 +18,4 @@ vim.opt.ignorecase = true -- Ignore case when searching, etc...
 vim.opt.smartcase = true -- Ignore case until one or more capital letters is detected
 
 -- Window options
-vim.wo.wrap = false
+vim.wo.wrap = true
