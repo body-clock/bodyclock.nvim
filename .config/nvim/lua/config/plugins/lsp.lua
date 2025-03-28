@@ -26,6 +26,8 @@ return {
 					},
 				},
 			},
+			{ "vim-ruby/vim-ruby" },
+			{ "tpope/vim-rails" },
 		},
 		config = function()
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -35,10 +37,11 @@ return {
 
 			lspconfig.ruby_lsp.setup({
 				capabilities = capabilities,
+				mason = false,
 				-- I'm not really sure whether to use the local ruby-lsp shim or have it
 				-- auto detect the version installed in my local ruby installation. I'm keeping
 				-- it here so I can make the decision later.
-				-- cmd = { "/Users/pperkins/.local/share/mise/shims/ruby-lsp" },
+				-- cmd = { "~/.local/share/mise/shims/ruby-lsp" },
 			})
 			lspconfig.rubocop.setup({
 				capabilities = capabilities,
