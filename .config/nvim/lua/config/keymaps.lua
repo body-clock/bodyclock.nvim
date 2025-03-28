@@ -42,7 +42,7 @@ vim.keymap.set("n", "gr", function()
 	require("telescope.builtin").lsp_references()
 end, { desc = "[g]o to [r]eference" })
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
-vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, { desc = "Rename under cursor" })
+vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename under cursor" })
 
 -- Quickfix list
 vim.keymap.set("n", "<leader>co", ":copen<CR>", { desc = "Open Quickfix list" })
