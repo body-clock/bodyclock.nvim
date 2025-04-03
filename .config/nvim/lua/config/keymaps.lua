@@ -129,3 +129,7 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Move down by half a page and c
 vim.keymap.set({ "n", "x", "o" }, "gs", function()
 	require("flash").jump()
 end, { desc = "Flash" })
+
+-- Peek (Markdown Preview)
+vim.keymap.set("n", "<leader>po", require("peek").open, { desc = "Open markdown preview" })
+vim.keymap.set("n", "<leader>pc", require("peek").close, { desc = "Close markdown preview" })
