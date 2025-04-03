@@ -16,6 +16,7 @@ vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" } -- How certain c
 vim.opt.cursorline = false -- Show which line your cursor is on
 vim.opt.ignorecase = true -- Ignore case when searching, etc...
 vim.opt.smartcase = true -- Ignore case until one or more capital letters is detected
+vim.opt.conceallevel = 0
 
 -- Window options
 vim.wo.wrap = true
