@@ -37,13 +37,12 @@ return {
 
 			lspconfig.ruby_lsp.setup({
 				capabilities = capabilities,
-				mason = false,
-				-- I'm not really sure whether to use the local ruby-lsp shim or have it
-				-- auto detect the version installed in my local ruby installation. I'm keeping
-				-- it here so I can make the decision later.
-				-- cmd = { "~/.local/share/mise/shims/ruby-lsp" },
+				init_options = {
+					formatter = "rubocop",
+					linters = { "rubocop" },
+				},
 			})
-			lspconfig.rubocop.setup({
+			lspconfig.stimulus_ls.setup({
 				capabilities = capabilities,
 			})
 			lspconfig.ts_ls.setup({
@@ -53,9 +52,6 @@ return {
 				capabilities = capabilities,
 			})
 			lspconfig.lua_ls.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.stimulus_ls.setup({
 				capabilities = capabilities,
 			})
 		end,
