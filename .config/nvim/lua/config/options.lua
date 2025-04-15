@@ -9,7 +9,6 @@ vim.opt.scrolloff = 10 -- Minimal number of screen lines to keep above and below
 vim.opt.number = true -- Show line numbers
 vim.opt.relativenumber = true -- Relative line numbers
 vim.opt.signcolumn = "yes" -- Always show sign column, display numbers
-vim.opt.conceallevel = 1 -- Determine how text with the "conceal" syntax attribute is shown, turned on for markdown
 vim.opt.splitright = true -- Open new vertical splits to the right
 vim.opt.splitbelow = true -- Open new horizontal splits to the bottom
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" } -- How certain characters are displayed
