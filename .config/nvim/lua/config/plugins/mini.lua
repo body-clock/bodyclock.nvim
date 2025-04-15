@@ -9,6 +9,15 @@ return {
 				autoread = true,
 				autowrite = true,
 			})
+			require("mini.indentscope").setup({
+				draw = {
+					delay = 0,
+					animation = require("mini.indentscope").gen_animation.none(),
+				},
+			})
+			require("mini.notify").setup({})
+			require("mini.icons").setup({})
+			require("mini.statusline").setup({})
 		end,
 	},
 }
