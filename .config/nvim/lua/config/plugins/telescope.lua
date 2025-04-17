@@ -4,23 +4,30 @@ return {
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-telescope/telescope-ui-select.nvim",
-		"debugloop/telescope-undo.nvim",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 	},
 	config = function()
-		require("telescope").setup({
-			defaults = require("telescope.themes").get_ivy(),
+		local telescope = require("telescope")
+		local themes = require("telescope.themes")
+		telescope.setup({
+			defaults = themes.get_ivy(),
 			pickers = {
 				find_files = {
+					file_ignore_patterns = { "node_modules", ".git", ".venv" },
 					hidden = true,
+				},
+				live_grep = {
+					file_ignore_patterns = { "node_modules", ".git", ".venv" },
+					additional_args = function()
+						return { "--hidden" }
+					end,
 				},
 				colorscheme = {
 					enable_preview = true,
 				},
 			},
 		})
-		require("telescope").load_extension("fzf")
-		require("telescope").load_extension("ui-select")
-		require("telescope").load_extension("undo")
+		telescope.load_extension("fzf")
+		telescope.load_extension("ui-select")
 	end,
 }
