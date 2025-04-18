@@ -75,33 +75,6 @@ vim.keymap.set("n", "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", { desc = "Qu
 -- LazyGit
 vim.keymap.set("n", "<leader>lg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
 
--- Harpoon
-local harpoon = require("harpoon")
-vim.keymap.set("n", "<leader>a", function()
-	harpoon:list():add()
-end, { desc = "Add current file to Harpoon" })
-vim.keymap.set("n", "<leader>h", function()
-	harpoon.ui:toggle_quick_menu(harpoon:list())
-end, { desc = "Toggle Harpoon quick menu" })
-vim.keymap.set("n", "<leader>1", function()
-	harpoon:list():select(1)
-end, { desc = "Select Harpoon 1" })
-vim.keymap.set("n", "<leader>2", function()
-	harpoon:list():select(2)
-end, { desc = "Select Harpoon 2" })
-vim.keymap.set("n", "<leader>3", function()
-	harpoon:list():select(3)
-end, { desc = "Select Harpoon 3" })
-vim.keymap.set("n", "<leader>4", function()
-	harpoon:list():select(4)
-end, { desc = "Select Harpoon 4" })
-vim.keymap.set("n", "<leader>n", function()
-	harpoon:list():next()
-end, { desc = "Next harpoon" })
-vim.keymap.set("n", "<leader>p", function()
-	harpoon:list():prev()
-end, { desc = "Previous harpoon" })
-
 -- Format
 vim.keymap.set("n", "<leader>f", function()
 	require("conform").format({ async = true, lsp_format = "fallback" })
@@ -133,3 +106,6 @@ end, { desc = "Flash" })
 -- Peek (Markdown Preview)
 vim.keymap.set("n", "<leader>po", require("peek").open, { desc = "Open markdown preview" })
 vim.keymap.set("n", "<leader>pc", require("peek").close, { desc = "Close markdown preview" })
+
+-- Plenary testing
+vim.keymap.set("n", "<leader>tf", "<cmd>PlenaryBustedFile %<cr>", { desc = "Run current test file with Plenary" })
