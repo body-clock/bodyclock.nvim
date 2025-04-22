@@ -35,13 +35,13 @@ return {
 
 			local lspconfig = require("lspconfig")
 
-			lspconfig.ruby_lsp.setup({
-				capabilities = capabilities,
-				init_options = {
-					formatter = "rubocop",
-					linters = { "rubocop" },
-				},
-			})
+			-- lspconfig.ruby_lsp.setup({
+			-- 	capabilities = capabilities,
+			-- 	init_options = {
+			-- 		formatter = "rubocop",
+			-- 		linters = { "rubocop" },
+			-- 	},
+			-- })
 			lspconfig.stimulus_ls.setup({
 				capabilities = capabilities,
 			})
@@ -52,6 +52,22 @@ return {
 				capabilities = capabilities,
 			})
 			lspconfig.lua_ls.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.harper_ls.setup({
+				capabilities = capabilities,
+				settings = {
+					["harper-ls"] = {
+						linters = {
+							SpellCheck = true,
+							SentenceCapitalization = false,
+							LongSentences = false,
+							ToDoHyphen = false,
+						},
+					},
+				},
+			})
+			lspconfig.yamlls.setup({
 				capabilities = capabilities,
 			})
 		end,
