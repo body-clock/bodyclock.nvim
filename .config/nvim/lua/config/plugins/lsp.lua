@@ -23,11 +23,10 @@ return {
 				opts = {
 					library = {
 						{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+						{ "nvim-dap-ui" },
 					},
 				},
 			},
-			{ "vim-ruby/vim-ruby" },
-			{ "tpope/vim-rails" },
 		},
 		config = function()
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -68,6 +67,12 @@ return {
 				},
 			})
 			lspconfig.yamlls.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.emmet_language_server.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.tailwindcss.setup({
 				capabilities = capabilities,
 			})
 		end,
