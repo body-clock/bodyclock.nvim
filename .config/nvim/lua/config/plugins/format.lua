@@ -15,8 +15,7 @@ return {
 			lua = { "stylua" },
 			ruby = { "rubocop" },
 			javascript = { "prettierd", "prettier", stop_after_first = true },
-			-- requires a local .erb_lint.yml config file
-			eruby = { "erb_lint", "erb_format", stop_after_first = true },
+			eruby = { "erb_format" },
 		},
 	},
 }
