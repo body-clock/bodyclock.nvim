@@ -3,5 +3,5 @@ return {
 	{ "vim-ruby/vim-ruby" },
 	{ "tpope/vim-rails" },
 	{ "RRethy/nvim-treesitter-endwise" },
-	{ "AndrewRadev/splitjoin.vim" }
+	{ "AndrewRadev/splitjoin.vim" },
 }
