@@ -7,7 +7,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
--- Overengineered solution to accidentally opening command line history
+-- Over-engineered solution to accidentally opening command line history
 local function escape(keys)
 	return vim.api.nvim_replace_termcodes(keys, true, false, true)
 end
