@@ -109,3 +109,8 @@ vim.keymap.set("n", "<leader>pc", require("peek").close, { desc = "Close markdow
 
 -- Plenary testing
 vim.keymap.set("n", "<leader>tf", "<cmd>PlenaryBustedFile %<cr>", { desc = "Run current test file with Plenary" })
+
+-- ViewComponents
+vim.keymap.set("n", "<leader>vc", function()
+	require("view-component").switch()
+end)
