@@ -15,6 +15,7 @@ return {
 			lua = { "stylua" },
 			ruby = { "rubocop" },
 			javascript = { "prettierd", "prettier", stop_after_first = true },
+			css = { "prettierd", "prettier", stop_after_first = true },
 			eruby = { "erb_format" },
 		},
 	},
