@@ -28,3 +28,6 @@ vim.api.nvim_create_autocmd("CmdWinEnter", {
 		end
 	end,
 })
+
+-- Set filetype to YAML when editing eruby.yaml for TS highlighting
+vim.api.nvim_create_autocmd("FileType", { pattern = "eruby.yaml", command = "set filetype=yaml" })
