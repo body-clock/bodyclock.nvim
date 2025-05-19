@@ -34,13 +34,9 @@ return {
 
 			local lspconfig = require("lspconfig")
 
-			-- lspconfig.ruby_lsp.setup({
-			-- 	capabilities = capabilities,
-			-- 	init_options = {
-			-- 		formatter = "rubocop",
-			-- 		linters = { "rubocop" },
-			-- 	},
-			-- })
+			-- ruby lsp is handled by its own plugin
+			-- check ./ruby-lsp.lua
+
 			lspconfig.stimulus_ls.setup({
 				capabilities = capabilities,
 			})
