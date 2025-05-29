@@ -14,8 +14,8 @@ return {
 		formatters_by_ft = {
 			lua = { "stylua" },
 			ruby = { "rubocop" },
-			javascript = { "prettierd", "prettier", stop_after_first = true },
-			css = { "prettierd", "prettier", stop_after_first = true },
+			javascript = { "biome" },
+			css = { "biome" },
 			eruby = { "erb_format" },
 		},
 	},

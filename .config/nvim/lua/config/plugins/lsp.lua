@@ -23,54 +23,43 @@ return {
 				opts = {
 					library = {
 						{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
-						{ "nvim-dap-ui" },
 					},
 				},
 			},
 		},
 		config = function()
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
-
-			local lspconfig = require("lspconfig")
-
-			-- ruby lsp is handled by its own plugin
-			-- check ./ruby-lsp.lua
-
-			lspconfig.stimulus_ls.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.ts_ls.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.marksman.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.lua_ls.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.harper_ls.setup({
-				capabilities = capabilities,
-				settings = {
-					["harper-ls"] = {
-						linters = {
-							SpellCheck = true,
-							SentenceCapitalization = false,
-							LongSentences = false,
-							ToDoHyphen = false,
+			local servers = {
+				ruby_lsp = {},
+				stimulus_ls = {},
+				ts_ls = {},
+				marksman = {},
+				lua_ls = {},
+				harper_ls = {
+					settings = {
+						["harper-ls"] = {
+							linters = {
+								SpellCheck = true,
+								SentenceCapitalization = false,
+								LongSentences = false,
+								ToDoHyphen = false,
+							},
 						},
 					},
 				},
-			})
-			lspconfig.yamlls.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.emmet_language_server.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.tailwindcss.setup({
-				capabilities = capabilities,
-			})
+				yamlls = {},
+				emmet_language_server = {},
+				tailwindcss = {},
+				biome = {},
+			}
+
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
+			capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
+
+			for server, opts in pairs(servers) do
+				vim.lsp.enable(server)
+				opts.capabilities = capabilities
+				vim.lsp.config(server, opts)
+			end
 		end,
 	},
 }
