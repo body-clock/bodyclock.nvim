@@ -32,6 +32,9 @@ vim.keymap.set("n", "<leader>sc", function()
 	require("telescope.builtin").colorscheme()
 end, { desc = "Find colorschemes" })
 vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>", { desc = "Find undo history" })
+vim.keymap.set("n", "<leader>sr", function()
+	require("telescope.builtin").resume()
+end, { desc = "Resume last picker" })
 
 -- LSP (Some telescope)
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover LSP information" })
@@ -76,6 +79,10 @@ vim.keymap.set("n", "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", { desc = "Qu
 vim.keymap.set("n", "<leader>lg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
 
 -- Format
+vim.keymap.set({ "n", "v" }, "<leader>f", function()
+	require("conform").format({ async = true, lsp_format = "fallback" })
+end, { desc = "Format current file" })
+
 vim.keymap.set("n", "<leader>f", function()
 	require("conform").format({ async = true, lsp_format = "fallback" })
 end, { desc = "Format current file" })
