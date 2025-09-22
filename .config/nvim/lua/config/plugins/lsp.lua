@@ -50,6 +50,8 @@ return {
 				emmet_language_server = {},
 				tailwindcss = {},
 				biome = {},
+				mdx_analyzer = {},
+				herb = {},
 			}
 
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
