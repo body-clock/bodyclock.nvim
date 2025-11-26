@@ -1,4 +1,3 @@
----@diagnostic disable: missing-fields
 return {
 	{
 		"tinted-theming/tinted-vim",
@@ -32,37 +31,16 @@ return {
 
 				vim.cmd("colorscheme " .. current_theme_name)
 
+				-- Without this autocmd, the mini picker doesn't show which item is selected
 				vim.api.nvim_create_autocmd("FocusGained", {
-					callback = handle_focus_gained,
+					callback = function()
+						handle_focus_gained()
+						vim.api.nvim_set_hl(0, "MiniPickMatchCurrent", { link = "Visual" })
+					end,
 				})
 			end
 
 			main()
 		end,
 	},
-	-- TODO: I'm trying this `tinted-nvim` alternative to the above
-	-- which is supposed to work more fluidly than `tinted-vim` and
-	-- has some nice reloading functionality and tinty integration.
-	-- It seems to be working fine for now, but sometimes the gitsigns
-	-- or diff doesn't color properly. If that continues to happen, I'll
-	-- go back to the above.
-	-- {
-	-- 	"tinted-theming/tinted-nvim",
-	-- 	dependencies = {
-	-- 		{ "rktjmp/fwatch.nvim" },
-	-- 	},
-	-- 	config = function()
-	-- 		vim.o.termguicolors = true
-	-- 		vim.g.tinted_colorspace = 256
-	-- 		local tinted = require("tinted-colorscheme")
-	-- 		tinted.setup(nil, {
-	-- 			supports = {
-	-- 				live_reload = true,
-	-- 			},
-	-- 			highlights = {
-	-- 				telescope_borders = true,
-	-- 			},
-	-- 		})
-	-- 	end,
-	-- },
 }
