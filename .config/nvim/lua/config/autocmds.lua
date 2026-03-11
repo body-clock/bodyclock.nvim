@@ -31,3 +31,15 @@ vim.api.nvim_create_autocmd("CmdWinEnter", {
 
 -- Set filetype to YAML when editing eruby.yaml for TS highlighting
 vim.api.nvim_create_autocmd("FileType", { pattern = "eruby.yaml", command = "set filetype=yaml" })
+
+-- Transparent background (replaces transparent.nvim)
+local function set_transparent_bg()
+	for _, group in ipairs({ "Normal", "NormalNC", "NormalFloat", "SignColumn", "EndOfBuffer", "FloatBorder" }) do
+		vim.api.nvim_set_hl(0, group, { bg = "NONE", ctermbg = "NONE" })
+	end
+end
+vim.api.nvim_create_autocmd("ColorScheme", {
+	group = vim.api.nvim_create_augroup("transparent-bg", { clear = true }),
+	callback = set_transparent_bg,
+})
+set_transparent_bg()

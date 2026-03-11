@@ -9,40 +9,46 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear highlight on
 -- Open Oil
 vim.keymap.set("n", "-", require("oil").open, { desc = "Open oil file browser" })
 
--- Telescope mappings
+-- mini.pick mappings
 vim.keymap.set("n", "<leader>sf", function()
-	require("telescope.builtin").find_files()
+	require("mini.pick").builtin.files()
 end, { desc = "Find file" })
 vim.keymap.set("n", "<leader>sg", function()
-	require("telescope.builtin").live_grep()
+	require("mini.pick").builtin.grep_live()
 end, { desc = "Find string live" })
 vim.keymap.set("n", "<leader>sw", function()
-	require("telescope.builtin").grep_string()
+	require("mini.pick").builtin.grep({ pattern = vim.fn.expand("<cword>") })
 end, { desc = "Find word under cursor" })
 vim.keymap.set("n", "<leader>ls", function()
-	require("telescope.builtin").buffers()
+	require("mini.pick").builtin.buffers()
 end, { desc = "Find buffer" })
 vim.keymap.set("n", "<leader>sh", function()
-	require("telescope.builtin").help_tags()
+	require("mini.pick").builtin.help()
 end, { desc = "Find help tags" })
 vim.keymap.set("n", "<leader>sm", function()
-	require("telescope.builtin").marks()
+	require("mini.extra").pickers.marks()
 end, { desc = "Find marks" })
 vim.keymap.set("n", "<leader>sc", function()
-	require("telescope.builtin").colorscheme()
+	require("mini.pick").start({
+		source = {
+			items = vim.fn.getcompletion("", "color"),
+			choose = function(item)
+				vim.cmd("colorscheme " .. item)
+			end,
+		},
+	})
 end, { desc = "Find colorschemes" })
-vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>", { desc = "Find undo history" })
 vim.keymap.set("n", "<leader>sr", function()
-	require("telescope.builtin").resume()
+	require("mini.pick").builtin.resume()
 end, { desc = "Resume last picker" })
 
--- LSP (Some telescope)
+-- LSP
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover LSP information" })
 vim.keymap.set("n", "gd", function()
-	require("telescope.builtin").lsp_definitions()
+	require("mini.extra").pickers.lsp({ scope = "definition" })
 end, { desc = "[g]o to [d]efinition" })
 vim.keymap.set("n", "gr", function()
-	require("telescope.builtin").lsp_references()
+	require("mini.extra").pickers.lsp({ scope = "references" })
 end, { desc = "[g]o to [r]eference" })
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename under cursor" })
@@ -80,10 +86,6 @@ vim.keymap.set("n", "<leader>lg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
 
 -- Format
 vim.keymap.set({ "n", "v" }, "<leader>f", function()
-	require("conform").format({ async = true, lsp_format = "fallback" })
-end, { desc = "Format current file" })
-
-vim.keymap.set("n", "<leader>f", function()
 	require("conform").format({ async = true, lsp_format = "fallback" })
 end, { desc = "Format current file" })
 
