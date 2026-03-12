@@ -40,9 +40,13 @@ Neovim picks up the change immediately if it's in the foreground, or on next foc
 
 ## LSP
 
-Servers are managed by [mason.nvim](https://github.com/williamboman/mason.nvim) and configured via the native `vim.lsp` API. Active servers: `ruby_lsp`, `stimulus_ls`, `ts_ls`, `lua_ls`, `harper_ls`, `yamlls`, `emmet_language_server`, `tailwindcss`, `biome`, `mdx_analyzer`, `herb`, `marksman`.
+Servers are configured via the native `vim.lsp` API. [mason.nvim](https://github.com/williamboman/mason.nvim) provides a `:Mason` UI for installing and updating most servers, but the Ruby-specific servers are installed as gems so they respect the project's Ruby version and bundler environment.
 
-`ruby_lsp` is started with `BUNDLE_IGNORE_CONFIG=1` to prevent it getting confused by `.bundle/config` in Vagrant projects.
+**Via `:Mason`:** `stimulus_ls`, `ts_ls`, `lua_ls`, `harper_ls`, `yamlls`, `emmet_language_server`, `tailwindcss`, `biome`, `mdx_analyzer`, `marksman`
+
+**As gems** (must be available in PATH from your Ruby version manager, e.g. mise/rbenv):
+- `ruby-lsp` → `gem install ruby-lsp`. Started with `BUNDLE_IGNORE_CONFIG=1` to prevent it getting confused by `.bundle/config` in Vagrant projects.
+- `herb-language-server` → `gem install herb-language-server` (ERB language server)
 
 | Key | Action |
 |---|---|
@@ -140,20 +144,6 @@ Gitsigns shows per-line git status in the sign column. Lazygit opens a full-scre
 | Key | Action |
 |---|---|
 | `<leader>vc` | Switch ViewComponent Ruby ↔ template |
-
-## AI — Sidekick + Supermaven
-
-[Sidekick](https://github.com/folke/sidekick.nvim) runs AI CLI tools (Claude Code, etc.) in a tmux-backed panel alongside the editor.
-[Supermaven](https://github.com/supermaven-inc/supermaven-nvim) provides inline AI completions.
-
-| Key | Action |
-|---|---|
-| `<leader>aa` | Toggle Sidekick CLI |
-| `<leader>as` | Select Sidekick tool |
-| `<leader>at` | Send current context to Sidekick |
-| `<leader>af` | Send current file to Sidekick |
-| `<leader>av` | Send visual selection to Sidekick |
-| `<leader>ap` | Sidekick prompt |
 
 ## Markdown — peek.nvim
 
