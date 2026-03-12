@@ -12,8 +12,9 @@ return {
 
 			-- Ruby adapter.
 			-- "attach" connects to a running rdbg TCP server (local or remote).
-			-- "launch" starts rdbg locally and attaches immediately.
-			-- For Vagrant+Docker, always use "attach" with port forwarded to host.
+			-- "launch" starts rdbg as a child process and connects immediately.
+			--   --nonstop: don't pause at the first line; run freely until binding.b
+			-- For Vagrant+Docker, use "attach" with the port forwarded to localhost.
 			dap.adapters.ruby = function(callback, config)
 				if config.request == "attach" then
 					callback({
@@ -31,7 +32,7 @@ return {
 							args = {
 								"exec", "rdbg",
 								"--open", "--port", tostring(config.port or 12345),
-								"-c", "--", config.command or "ruby",
+								"--nonstop", "-c", "--", config.command or "ruby",
 								unpack(config.args or {}),
 							},
 						},
@@ -39,29 +40,20 @@ return {
 				end
 			end
 
-			-- Default configurations for local development.
-			-- For Vagrant projects, override these in a .nvim.lua at the project root
-			-- (requires vim.opt.exrc = true in options.lua).
+			-- Picker configurations (<leader>dc to select).
+			-- For RSpec, prefer the direct keymaps (<leader>ds / <leader>dl) which
+			-- skip the picker and pass the current file/line automatically.
+			--
+			-- For a running Rails server, start it with:
+			--   RUBY_DEBUG_OPEN=1 RUBY_DEBUG_PORT=12345 RUBY_DEBUG_HOST=127.0.0.1 bundle exec rails s
+			-- then use "Attach" below. When the browser hits a binding.b, dap-ui opens.
+			-- For Vagrant projects, override in a .nvim.lua at the project root.
 			dap.configurations.ruby = {
 				{
 					type = "ruby",
-					name = "Attach to rdbg (local)",
+					name = "Attach",
 					request = "attach",
 					port = 12345,
-				},
-				{
-					type = "ruby",
-					name = "Run current file",
-					request = "launch",
-					command = "ruby",
-					args = { "${file}" },
-				},
-				{
-					type = "ruby",
-					name = "Run RSpec (current file)",
-					request = "launch",
-					command = "rspec",
-					args = { "${file}" },
 				},
 			}
 
