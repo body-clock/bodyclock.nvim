@@ -20,6 +20,8 @@ return {
 			notify.setup()
 			vim.notify = notify.make_notify()
 			require("mini.pairs").setup()
+			require("mini.pick").setup()
+			vim.ui.select = require("mini.pick").ui_select
 			require("mini.sessions").setup({
 				autoload = true,
 				autosave = true,
