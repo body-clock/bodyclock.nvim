@@ -23,6 +23,10 @@ return {
 						port = config.port or 12345,
 					})
 				else
+					-- Find the project root by locating the Gemfile upward from the
+					-- current file, so bundle exec runs in the right directory.
+					local gemfile = vim.fn.findfile("Gemfile", ".;")
+					local cwd = gemfile ~= "" and vim.fn.fnamemodify(gemfile, ":p:h") or vim.fn.getcwd()
 					callback({
 						type = "server",
 						host = "127.0.0.1",
@@ -35,6 +39,7 @@ return {
 								"--nonstop", "-c", "--", config.command or "ruby",
 								unpack(config.args or {}),
 							},
+							cwd = cwd,
 						},
 					})
 				end
