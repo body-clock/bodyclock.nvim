@@ -19,7 +19,7 @@ return {
 		dependencies = {
 			{
 				"folke/lazydev.nvim",
-				ft = "lua", -- only load on lua files
+				ft = "lua",
 				opts = {
 					library = {
 						{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
@@ -29,7 +29,12 @@ return {
 		},
 		config = function()
 			local servers = {
-				ruby_lsp = {},
+				-- BUNDLE_IGNORE_CONFIG prevents ruby-lsp from being confused by
+				-- .bundle/config in vagrant projects (e.g. vendor/bundle paths).
+				-- Safe for normal projects which don't have a .bundle/config.
+				ruby_lsp = {
+					cmd = { "env", "BUNDLE_IGNORE_CONFIG=1", "ruby-lsp" },
+				},
 				stimulus_ls = {},
 				ts_ls = {},
 				marksman = {},
