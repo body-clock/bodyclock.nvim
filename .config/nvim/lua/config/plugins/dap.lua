@@ -12,8 +12,11 @@ return {
 
 			-- Ruby adapter.
 			-- "attach" connects to a running rdbg TCP server (local or remote).
-			-- "launch" starts rdbg as a child process and connects immediately.
-			--   --nonstop: don't pause at the first line; run freely until binding.b
+			-- "launch" starts rdbg as a child process.
+			--   Without --nonstop, rdbg pauses at the first line and waits for DAP
+			--   to finish setup (setBreakpoints, configurationDone) before running.
+			--   This avoids a race where the test completes before breakpoints are set.
+			--   Press <leader>dc once after launch to start execution.
 			-- For Vagrant+Docker, use "attach" with the port forwarded to localhost.
 			dap.adapters.ruby = function(callback, config)
 				if config.request == "attach" then
@@ -36,7 +39,7 @@ return {
 							args = {
 								"exec", "rdbg",
 								"--open", "--port", tostring(config.port or 12345),
-								"--nonstop", "-c", "--", config.command or "ruby",
+								"-c", "--", config.command or "ruby",
 								unpack(config.args or {}),
 							},
 							cwd = cwd,
@@ -62,10 +65,9 @@ return {
 				},
 			}
 
-			-- Auto open/close dap-ui with sessions
+			-- Auto-open dap-ui when a session starts. Not auto-closing on exit so
+			-- the last state stays visible — close manually with <leader>du.
 			dap.listeners.after.event_initialized["dapui"] = dapui.open
-			dap.listeners.before.event_terminated["dapui"] = dapui.close
-			dap.listeners.before.event_exited["dapui"] = dapui.close
 		end,
 	},
 }
