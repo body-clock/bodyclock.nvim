@@ -81,6 +81,31 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>xL", "<cmd>Trouble loclist toggle<cr>", { desc = "Location List (Trouble)" })
 vim.keymap.set("n", "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix List (Trouble)" })
 
+-- DAP (debugging)
+vim.keymap.set("n", "<leader>db", function() require("dap").toggle_breakpoint() end, { desc = "Toggle breakpoint" })
+vim.keymap.set("n", "<leader>dc", function() require("dap").continue() end, { desc = "Continue / attach" })
+vim.keymap.set("n", "<leader>dn", function() require("dap").step_over() end, { desc = "Step over" })
+vim.keymap.set("n", "<leader>di", function() require("dap").step_into() end, { desc = "Step into" })
+vim.keymap.set("n", "<leader>do", function() require("dap").step_out() end, { desc = "Step out" })
+vim.keymap.set("n", "<leader>dq", function() require("dap").terminate() end, { desc = "Terminate session" })
+vim.keymap.set("n", "<leader>du", function() require("dapui").toggle() end, { desc = "Toggle DAP UI" })
+vim.keymap.set("n", "<leader>dr", function() require("dap").repl.toggle() end, { desc = "Toggle REPL" })
+-- Run RSpec under the debugger — skips the picker, binding.b breaks into dap-ui
+vim.keymap.set("n", "<leader>ds", function()
+	require("dap").run({
+		type = "ruby", request = "launch",
+		name = "RSpec (current file)",
+		command = "rspec", args = { vim.fn.expand("%:p") },
+	})
+end, { desc = "Debug: RSpec current file" })
+vim.keymap.set("n", "<leader>dl", function()
+	require("dap").run({
+		type = "ruby", request = "launch",
+		name = "RSpec (current line)",
+		command = "rspec", args = { vim.fn.expand("%:p") .. ":" .. vim.fn.line(".") },
+	})
+end, { desc = "Debug: RSpec current line" })
+
 -- LazyGit
 vim.keymap.set("n", "<leader>lg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
 
