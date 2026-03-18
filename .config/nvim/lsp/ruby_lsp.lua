@@ -14,7 +14,7 @@ return {
 		linters = { "rubocop" },
 		addonSettings = {
 			["Ruby LSP Rails"] = {
-				enablePendingMigrationsPrompt = true,
+				enablePendingMigrationsPrompt = false,
 			},
 		},
 	},
