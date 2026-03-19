@@ -1,8 +1,6 @@
-return {
-	"stevearc/conform.nvim",
-	event = { "BufWritePre" },
-	cmd = { "ConformInfo" },
-	opts = {
+MiniDeps.later(function()
+	MiniDeps.add("stevearc/conform.nvim")
+	require("conform").setup({
 		formatters = {
 			erb_lint = {
 				stdin = false,
@@ -18,5 +16,5 @@ return {
 			javascriptreact = { "prettier" },
 			css = { "prettier" },
 		},
-	},
-}
+	})
+end)

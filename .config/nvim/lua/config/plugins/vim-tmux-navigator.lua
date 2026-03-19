@@ -1,11 +1,3 @@
-return {
-	"christoomey/vim-tmux-navigator",
-	cmd = {
-		"TmuxNavigateLeft",
-		"TmuxNavigateDown",
-		"TmuxNavigateUp",
-		"TmuxNavigateRight",
-		"TmuxNavigatePrevious",
-		"TmuxNavigatorProcessList",
-	},
-}
+MiniDeps.later(function()
+	MiniDeps.add("christoomey/vim-tmux-navigator")
+end)

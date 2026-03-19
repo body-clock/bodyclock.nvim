@@ -1,10 +1,8 @@
-return {
-	"stevearc/oil.nvim",
-	config = function()
-		require("oil").setup({
-			view_options = {
-				show_hidden = true,
-			},
-		})
-	end,
-}
+MiniDeps.later(function()
+	MiniDeps.add("stevearc/oil.nvim")
+	require("oil").setup({
+		view_options = {
+			show_hidden = true,
+		},
+	})
+end)

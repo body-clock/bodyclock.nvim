@@ -7,7 +7,7 @@ vim.keymap.set("v", "<space>x", ":lua<CR>", { desc = "Source visual selection" }
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear highlight on search" })
 
 -- Open Oil
-vim.keymap.set("n", "-", require("oil").open, { desc = "Open oil file browser" })
+vim.keymap.set("n", "-", function() require("oil").open() end, { desc = "Open oil file browser" })
 
 -- mini.pick mappings
 vim.keymap.set("n", "<leader>sf", function()
@@ -113,8 +113,8 @@ vim.keymap.set({ "n", "x", "o" }, "gs", function()
 end, { desc = "Flash" })
 
 -- Peek (Markdown Preview)
-vim.keymap.set("n", "<leader>po", require("peek").open, { desc = "Open markdown preview" })
-vim.keymap.set("n", "<leader>pc", require("peek").close, { desc = "Close markdown preview" })
+vim.keymap.set("n", "<leader>po", function() require("peek").open() end, { desc = "Open markdown preview" })
+vim.keymap.set("n", "<leader>pc", function() require("peek").close() end, { desc = "Close markdown preview" })
 
 -- Plenary testing
 vim.keymap.set("n", "<leader>tf", "<cmd>PlenaryBustedFile %<cr>", { desc = "Run current test file with Plenary" })

@@ -1,6 +1,4 @@
-return {
-	"lewis6991/gitsigns.nvim",
-	config = function()
-		require("gitsigns").setup()
-	end,
-}
+MiniDeps.later(function()
+	MiniDeps.add("lewis6991/gitsigns.nvim")
+	require("gitsigns").setup()
+end)

@@ -1,6 +1,7 @@
-return {
-	"m4xshen/hardtime.nvim",
-	lazy = false,
-	dependencies = { "MunifTanjim/nui.nvim" },
-	opts = {},
-}
+MiniDeps.now(function()
+	MiniDeps.add({
+		source = "m4xshen/hardtime.nvim",
+		depends = { "MunifTanjim/nui.nvim" },
+	})
+	require("hardtime").setup()
+end)
