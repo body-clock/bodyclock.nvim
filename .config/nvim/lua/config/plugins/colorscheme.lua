@@ -1,13 +1,19 @@
 return {
 	{
 		"tinted-theming/tinted-nvim",
-		dependencies = { "rktjmp/fwatch.nvim" },
-		config = function()
+		priority = 1000,
+		lazy = false,
+		opts = {
+			selector = {
+				enabled = true,
+				mode = "file",
+				path = "~/.local/share/tinted-theming/tinty/current_scheme",
+				watch = true,
+			},
+		},
+		config = function(_, opts)
 			vim.o.termguicolors = true
-			vim.g.tinted_colorspace = 256
-			require("tinted-colorscheme").setup(nil, {
-				supports = { live_reload = true },
-			})
+			require("tinted-nvim").setup(opts)
 			-- Re-trigger ColorScheme on focus so plugins (gitsigns, transparent bg, etc.)
 			-- stay in sync when tinty switches themes externally.
 			vim.api.nvim_create_autocmd("FocusGained", {

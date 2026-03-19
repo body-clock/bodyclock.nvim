@@ -1,4 +1,4 @@
 return {
-  cmd = { "herb-language-server", "--stdio" },
-  filetypes = { "eruby" },
+	cmd = { "herb-language-server", "--stdio" },
+	filetypes = { "eruby" },
 }
