@@ -2,6 +2,14 @@ return {
 	"stevearc/conform.nvim",
 	event = { "BufWritePre" },
 	cmd = { "ConformInfo" },
+	keys = {
+		{
+			"<leader>f",
+			function() require("conform").format({ async = true, lsp_format = "fallback" }) end,
+			mode = { "n", "v" },
+			desc = "Format current file",
+		},
+	},
 	opts = {
 		formatters = {
 			erb_lint = {
