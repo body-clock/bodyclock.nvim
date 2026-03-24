@@ -42,14 +42,11 @@ vim.keymap.set("n", "<leader>sr", function()
 	require("mini.pick").builtin.resume()
 end, { desc = "Resume last picker" })
 
+-- Toggle transparency
+vim.keymap.set("n", "<leader>tt", "<cmd>TransparentToggle<cr>", { desc = "Toggle transparency" })
+
 -- LSP
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover LSP information" })
-vim.keymap.set("n", "gd", function()
-	require("mini.extra").pickers.lsp({ scope = "definition" })
-end, { desc = "[g]o to [d]efinition" })
-vim.keymap.set("n", "gr", function()
-	require("mini.extra").pickers.lsp({ scope = "references" })
-end, { desc = "[g]o to [r]eference" })
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename under cursor" })
 
