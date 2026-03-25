@@ -1,6 +1,7 @@
 return {
 	{
 		"echasnovski/mini.nvim",
+		lazy = false,
 		keys = {
 			{ "<leader>sf", function() require("mini.pick").builtin.files() end, desc = "Find file" },
 			{ "<leader>sg", function() require("mini.pick").builtin.grep_live() end, desc = "Find string live" },
