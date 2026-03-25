@@ -1,54 +1,10 @@
--- Execute current line, useful for testing out keybinds and other settings
+-- Execute current line/file, useful for testing keybinds and settings
 vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>", { desc = "Source current file" })
 vim.keymap.set("n", "<space>x", ":.lua<CR>", { desc = "Source current line" })
 vim.keymap.set("v", "<space>x", ":lua<CR>", { desc = "Source visual selection" })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear highlight on search" })
-
--- Open Oil
-vim.keymap.set("n", "-", require("oil").open, { desc = "Open oil file browser" })
-
--- mini.pick mappings
-vim.keymap.set("n", "<leader>sf", function()
-	require("mini.pick").builtin.files()
-end, { desc = "Find file" })
-vim.keymap.set("n", "<leader>sg", function()
-	require("mini.pick").builtin.grep_live()
-end, { desc = "Find string live" })
-vim.keymap.set("n", "<leader>sw", function()
-	require("mini.pick").builtin.grep({ pattern = vim.fn.expand("<cword>") })
-end, { desc = "Find word under cursor" })
-vim.keymap.set("n", "<leader>ls", function()
-	require("mini.pick").builtin.buffers()
-end, { desc = "Find buffer" })
-vim.keymap.set("n", "<leader>sh", function()
-	require("mini.pick").builtin.help()
-end, { desc = "Find help tags" })
-vim.keymap.set("n", "<leader>sm", function()
-	require("mini.extra").pickers.marks()
-end, { desc = "Find marks" })
-vim.keymap.set("n", "<leader>sc", function()
-	require("mini.pick").start({
-		source = {
-			items = vim.fn.getcompletion("", "color"),
-			choose = function(item)
-				vim.cmd("colorscheme " .. item)
-			end,
-		},
-	})
-end, { desc = "Find colorschemes" })
-vim.keymap.set("n", "<leader>sr", function()
-	require("mini.pick").builtin.resume()
-end, { desc = "Resume last picker" })
-
--- Toggle transparency
-vim.keymap.set("n", "<leader>tt", "<cmd>TransparentToggle<cr>", { desc = "Toggle transparency" })
-
--- LSP
-vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover LSP information" })
-vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
-vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename under cursor" })
 
 -- Quickfix list
 vim.keymap.set("n", "<leader>co", ":copen<CR>", { desc = "Open Quickfix list" })
@@ -60,63 +16,9 @@ vim.keymap.set("n", "<leader>cp", ":cprev<CR>", { desc = "Previous Quickfix list
 vim.keymap.set("n", "<leader>bn", ":bnext<CR>", { desc = "Next buffer" })
 vim.keymap.set("n", "<leader>bp", ":bprev<CR>", { desc = "Previous buffer" })
 
--- Trouble/Diagnostics
-vim.keymap.set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Diagnostics (Trouble)" })
-vim.keymap.set(
-	"n",
-	"<leader>xX",
-	"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-	{ desc = "Buffer Diagnostics (Trouble)" }
-)
-vim.keymap.set("n", "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", { desc = "Symbols (Trouble)" })
-vim.keymap.set(
-	"n",
-	"<leader>cl",
-	"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-	{ desc = "LSP Definitions / references / ... (Trouble)" }
-)
-vim.keymap.set("n", "<leader>xL", "<cmd>Trouble loclist toggle<cr>", { desc = "Location List (Trouble)" })
-vim.keymap.set("n", "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix List (Trouble)" })
+-- Center cursor when page navigating
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Move up half page and center" })
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Move down half page and center" })
 
--- LazyGit
-vim.keymap.set("n", "<leader>lg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
-
--- Format
-vim.keymap.set({ "n", "v" }, "<leader>f", function()
-	require("conform").format({ async = true, lsp_format = "fallback" })
-end, { desc = "Format current file" })
-
--- Smoother window movement
---  See `:help wincmd` for a list of all window commands
-vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
-vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
-vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
-vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
-
--- Vim/Tmux Navigation
-vim.keymap.set("n", "<c-h>", "<cmd>TmuxNavigateLeft<cr>", { desc = "Move left tmux pane" })
-vim.keymap.set("n", "<c-j>", "<cmd>TmuxNavigateDown<cr>", { desc = "Move down tmux pane" })
-vim.keymap.set("n", "<c-k>", "<cmd>TmuxNavigateUp<cr>", { desc = "Move up tmux pane" })
-vim.keymap.set("n", "<c-l>", "<cmd>TmuxNavigateRight<cr>", { desc = "Move right tmux pane" })
-vim.keymap.set("n", "<c-\\>", "<cmd>TmuxNavigatePrevious<cr>", { desc = "Move to previous tmux pane" })
-
--- Center cursor in screen when page navigating
-vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Move up by half a page and center" })
-vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Move down by half a page and center" })
-
--- Flash
-vim.keymap.set({ "n", "x", "o" }, "gs", function()
-	require("flash").jump()
-end, { desc = "Flash" })
-
--- Peek (Markdown Preview)
-vim.keymap.set("n", "<leader>po", require("peek").open, { desc = "Open markdown preview" })
-vim.keymap.set("n", "<leader>pc", require("peek").close, { desc = "Close markdown preview" })
-
--- Plenary testing
+-- Plenary test runner
 vim.keymap.set("n", "<leader>tf", "<cmd>PlenaryBustedFile %<cr>", { desc = "Run current test file with Plenary" })
-
--- ViewComponents
-vim.keymap.set("n", "<leader>vc", function()
-	require("view-component").switch()
-end)

@@ -38,6 +38,7 @@ return {
 				-- and the ColorScheme autocmd above will re-apply transparency when on
 				vim.cmd("colorscheme " .. (vim.g.colors_name or ""))
 			end, {})
+			vim.keymap.set("n", "<leader>tt", "<cmd>TransparentToggle<cr>", { desc = "Toggle transparency" })
 
 			-- Re-trigger ColorScheme on focus so plugins (gitsigns, transparent bg, etc.)
 			-- stay in sync when tinty switches themes externally.
