@@ -1,3 +1,0 @@
--- vim-ruby, vim-rails, splitjoin.vim, and nvim-treesitter-endwise are loaded
--- via vim.pack.add() in pack.lua. They need no Lua setup — their ftplugins
--- fire automatically when relevant filetypes are opened.
