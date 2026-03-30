@@ -1,7 +1,3 @@
-return {
-	-- a collection of plugins that improve ruby/rails dev
-	{ "vim-ruby/vim-ruby" },
-	{ "tpope/vim-rails" },
-	{ "RRethy/nvim-treesitter-endwise" },
-	{ "AndrewRadev/splitjoin.vim" },
-}
+-- vim-ruby, vim-rails, splitjoin.vim, and nvim-treesitter-endwise are loaded
+-- via vim.pack.add() in pack.lua. They need no Lua setup — their ftplugins
+-- fire automatically when relevant filetypes are opened.

@@ -1,13 +1,7 @@
-return {
-	"stevearc/oil.nvim",
-	keys = {
-		{ "-", "<cmd>Oil<cr>", desc = "Open oil file browser" },
+require("oil").setup({
+	view_options = {
+		show_hidden = true,
 	},
-	config = function()
-		require("oil").setup({
-			view_options = {
-				show_hidden = true,
-			},
-		})
-	end,
-}
+})
+
+vim.keymap.set("n", "-", "<cmd>Oil<cr>", { desc = "Open oil file browser" })
