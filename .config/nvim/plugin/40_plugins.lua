@@ -88,10 +88,16 @@ now_if_args(function()
 end)
 
 -- ── LSP stack ─────────────────────────────────────────────────────────────────
+-- nvim-lspconfig loaded eagerly (now) so :LspInfo / :LspLog are always available.
+-- mason and lazydev are deferred with the rest of the LSP setup since they're
+-- only meaningful when files are open.
+now(function()
+  add({ 'https://github.com/neovim/nvim-lspconfig' })
+end)
+
 now_if_args(function()
   add({
     'https://github.com/williamboman/mason.nvim',
-    'https://github.com/neovim/nvim-lspconfig',
     'https://github.com/folke/lazydev.nvim',
   })
 
