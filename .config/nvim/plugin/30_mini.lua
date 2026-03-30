@@ -1,7 +1,9 @@
 local now, later, now_if_args = Config.now, Config.later, Config.now_if_args
 
 -- Immediately needed for first screen draw
-now(function() require('mini.icons').setup() end)
+now(function()
+  require('mini.icons').setup()
+end)
 
 now(function()
   local notify = require('mini.notify')
@@ -9,7 +11,9 @@ now(function()
   vim.notify = notify.make_notify()
 end)
 
-now(function() require('mini.statusline').setup() end)
+now(function()
+  require('mini.statusline').setup()
+end)
 
 now(function()
   require('mini.sessions').setup({
@@ -35,7 +39,9 @@ now_if_args(function()
 end)
 
 -- Deferred — load after first draw
-later(function() require('mini.ai').setup() end)
+later(function()
+  require('mini.ai').setup()
+end)
 
 later(function()
   local hipatterns = require('mini.hipatterns')
@@ -55,7 +61,9 @@ later(function()
   })
 end)
 
-later(function() require('mini.pairs').setup() end)
+later(function()
+  require('mini.pairs').setup()
+end)
 
 later(function()
   require('mini.pick').setup()
@@ -63,4 +71,6 @@ later(function()
   vim.ui.select = require('mini.pick').ui_select
 end)
 
-later(function() require('mini.surround').setup() end)
+later(function()
+  require('mini.surround').setup()
+end)

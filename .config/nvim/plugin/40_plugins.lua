@@ -18,11 +18,20 @@ now(function()
   vim.g.transparent_bg = true
 
   local function apply_transparent_bg()
-    if not vim.g.transparent_bg then return end
+    if not vim.g.transparent_bg then
+      return
+    end
     for _, group in ipairs({
-      'Normal', 'NormalNC', 'NormalFloat',
-      'SignColumn', 'LineNr', 'CursorLineNr', 'EndOfBuffer',
-      'StatusLine', 'TabLine', 'TabLineFill',
+      'Normal',
+      'NormalNC',
+      'NormalFloat',
+      'SignColumn',
+      'LineNr',
+      'CursorLineNr',
+      'EndOfBuffer',
+      'StatusLine',
+      'TabLine',
+      'TabLineFill',
     }) do
       vim.api.nvim_set_hl(0, group, { bg = 'NONE', ctermbg = 'NONE' })
     end
@@ -63,7 +72,9 @@ now_if_args(function()
     return #vim.api.nvim_get_runtime_file('parser/' .. lang .. '.*', false) == 0
   end
   local to_install = vim.tbl_filter(isnt_installed, languages)
-  if #to_install > 0 then require('nvim-treesitter').install(to_install) end
+  if #to_install > 0 then
+    require('nvim-treesitter').install(to_install)
+  end
 
   -- nvim-treesitter 1.0 (main): no configs module. Enable highlighting per
   -- filetype via FileType autocmd using neovim's built-in vim.treesitter.start().
@@ -97,7 +108,7 @@ now_if_args(function()
 
   Config.new_autocmd('LspAttach', nil, function(args)
     local buf = args.buf
-    vim.keymap.set('n', 'K',           vim.lsp.buf.hover,       { buffer = buf, desc = 'Hover LSP information' })
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = buf, desc = 'Hover LSP information' })
     vim.keymap.set('n', 'gd', function()
       require('mini.extra').pickers.lsp({ scope = 'definition' })
     end, { buffer = buf, desc = '[g]o to [d]efinition' })
@@ -105,13 +116,22 @@ now_if_args(function()
       require('mini.extra').pickers.lsp({ scope = 'references' })
     end, { buffer = buf, desc = '[g]o to [r]eference' })
     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = buf, desc = 'Code action' })
-    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename,      { buffer = buf, desc = 'Rename under cursor' })
+    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { buffer = buf, desc = 'Rename under cursor' })
   end, 'LSP keymaps on attach')
 
   vim.lsp.enable({
-    'ruby_lsp', 'stimulus_ls', 'ts_ls', 'marksman', 'lua_ls',
-    'harper_ls', 'yamlls', 'emmet_language_server',
-    'tailwindcss', 'biome', 'mdx_analyzer', 'herb',
+    'ruby_lsp',
+    'stimulus_ls',
+    'ts_ls',
+    'marksman',
+    'lua_ls',
+    'harper_ls',
+    'yamlls',
+    'emmet_language_server',
+    'tailwindcss',
+    'biome',
+    'mdx_analyzer',
+    'herb',
   })
 end)
 
@@ -126,8 +146,13 @@ later(function()
   add({ 'https://github.com/HiPhish/rainbow-delimiters.nvim' })
   require('rainbow-delimiters.setup').setup({
     highlight = {
-      'rainbowcol1', 'rainbowcol2', 'rainbowcol3', 'rainbowcol4',
-      'rainbowcol5', 'rainbowcol6', 'rainbowcol7',
+      'rainbowcol1',
+      'rainbowcol2',
+      'rainbowcol3',
+      'rainbowcol4',
+      'rainbowcol5',
+      'rainbowcol6',
+      'rainbowcol7',
     },
   })
 end)
@@ -173,11 +198,11 @@ later(function()
       },
     },
     formatters_by_ft = {
-      lua        = { 'stylua' },
-      ruby       = { 'rubocop' },
+      lua = { 'stylua' },
+      ruby = { 'rubocop' },
       javascript = { 'prettier' },
       javascriptreact = { 'prettier' },
-      css        = { 'prettier' },
+      css = { 'prettier' },
     },
   })
 end)
@@ -187,7 +212,7 @@ later(function()
   require('trouble').setup({
     modes = {
       diagnostics_buffer = {
-        mode   = 'diagnostics',
+        mode = 'diagnostics',
         filter = { buf = 0 },
       },
     },
@@ -205,7 +230,7 @@ end)
 later(function()
   add({ 'https://github.com/toppair/peek.nvim' })
   require('peek').setup()
-  vim.api.nvim_create_user_command('PeekOpen',  require('peek').open,  {})
+  vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
   vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
 end)
 

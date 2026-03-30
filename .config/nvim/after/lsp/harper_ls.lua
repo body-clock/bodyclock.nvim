@@ -2,10 +2,10 @@ return {
   settings = {
     ['harper-ls'] = {
       linters = {
-        SpellCheck             = true,
+        SpellCheck = true,
         SentenceCapitalization = false,
-        LongSentences          = false,
-        ToDoHyphen             = false,
+        LongSentences = false,
+        ToDoHyphen = false,
       },
     },
   },

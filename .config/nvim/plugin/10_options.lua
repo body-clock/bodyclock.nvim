@@ -68,4 +68,3 @@ end, 'eruby.yaml → yaml')
 
 -- Per-project .nvim.lua overrides (e.g. DAP configs for Vagrant)
 vim.opt.exrc = true
-

@@ -8,8 +8,12 @@ vim.pack.add({ 'https://github.com/nvim-mini/mini.nvim' })
 --   later()        — deferred after first screen draw (most plugins)
 --   now_if_args()  — now() if Neovim opened a file on the CLI, else later()
 local misc = require('mini.misc')
-Config.now         = function(f) misc.safely('now', f) end
-Config.later       = function(f) misc.safely('later', f) end
+Config.now = function(f)
+  misc.safely('now', f)
+end
+Config.later = function(f)
+  misc.safely('later', f)
+end
 Config.now_if_args = vim.fn.argc(-1) > 0 and Config.now or Config.later
 
 -- Shared autocommand group + helper used throughout plugin/ files
@@ -23,8 +27,12 @@ end
 Config.on_packchanged = function(plugin_name, kinds, callback, desc)
   local f = function(ev)
     local name, kind = ev.data.spec.name, ev.data.kind
-    if not (name == plugin_name and vim.tbl_contains(kinds, kind)) then return end
-    if not ev.data.active then vim.cmd.packadd(plugin_name) end
+    if not (name == plugin_name and vim.tbl_contains(kinds, kind)) then
+      return
+    end
+    if not ev.data.active then
+      vim.cmd.packadd(plugin_name)
+    end
     callback()
   end
   Config.new_autocmd('PackChanged', '*', f, desc)
