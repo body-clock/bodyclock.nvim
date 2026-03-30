@@ -1,4 +1,4 @@
-local now, later = Config.now, Config.later
+local now, later, now_if_args = Config.now, Config.later, Config.now_if_args
 
 -- Immediately needed for first screen draw
 now(function() require('mini.icons').setup() end)
@@ -16,6 +16,22 @@ now(function()
     autoload = true,
     autosave = true,
   })
+end)
+
+-- Completion (load when files are open — must be before LSP so capabilities are ready)
+now_if_args(function()
+  require('mini.completion').setup({
+    lsp_completion = {
+      source_func = 'omnifunc',
+      auto_setup = false,
+    },
+  })
+  -- Set omnifunc per-buffer when LSP attaches
+  Config.new_autocmd('LspAttach', nil, function(args)
+    vim.bo[args.buf].omnifunc = 'v:lua.MiniCompletion.completefunc_lsp'
+  end, 'Set omnifunc for LSP')
+  -- Advertise completion capabilities to all LSP servers
+  vim.lsp.config('*', { capabilities = MiniCompletion.get_lsp_capabilities() })
 end)
 
 -- Deferred — load after first draw

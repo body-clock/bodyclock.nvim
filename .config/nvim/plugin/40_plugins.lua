@@ -82,8 +82,6 @@ now_if_args(function()
     'https://github.com/williamboman/mason.nvim',
     'https://github.com/neovim/nvim-lspconfig',
     'https://github.com/folke/lazydev.nvim',
-    { src = 'https://github.com/saghen/blink.cmp', name = 'blink.cmp', version = vim.version.range('1.*') },
-    'https://github.com/rafamadriz/friendly-snippets',
   })
 
   require('mason').setup()
@@ -95,28 +93,7 @@ now_if_args(function()
     },
   })
 
-  ---@diagnostic disable-next-line: missing-fields
-  require('blink.cmp').setup({
-    keymap = { preset = 'default' },
-    appearance = {
-      use_nvim_cmp_as_default = true,
-      nerd_font_variant = 'mono',
-    },
-    sources = {
-      default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
-      providers = {
-        lazydev = {
-          name = 'LazyDev',
-          module = 'lazydev.integrations.blink',
-          score_offset = 100,
-        },
-      },
-    },
-  })
-
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
-  vim.lsp.config('*', { capabilities = capabilities })
+  -- capabilities are set in 30_mini.lua via MiniCompletion.get_lsp_capabilities()
 
   Config.new_autocmd('LspAttach', nil, function(args)
     local buf = args.buf
