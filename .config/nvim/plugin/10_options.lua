@@ -69,5 +69,3 @@ end, 'eruby.yaml → yaml')
 -- Per-project .nvim.lua overrides (e.g. DAP configs for Vagrant)
 vim.opt.exrc = true
 
--- Stop LSP log from growing unboundedly (default WARN still produces ~100MB+ logs)
-vim.lsp.set_log_level('OFF')
