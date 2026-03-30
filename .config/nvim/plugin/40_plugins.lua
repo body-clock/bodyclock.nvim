@@ -82,7 +82,7 @@ now_if_args(function()
     'https://github.com/williamboman/mason.nvim',
     'https://github.com/neovim/nvim-lspconfig',
     'https://github.com/folke/lazydev.nvim',
-    'https://github.com/saghen/blink.cmp',
+    { src = 'https://github.com/saghen/blink.cmp', name = 'blink.cmp', version = vim.version.range('1.*') },
     'https://github.com/rafamadriz/friendly-snippets',
   })
 
