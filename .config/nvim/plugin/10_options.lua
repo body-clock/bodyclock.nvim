@@ -2,6 +2,11 @@
 vim.g.mapleader      = ' '
 vim.g.maplocalleader = '\\'
 
+-- Disable unused providers to suppress healthcheck warnings
+vim.g.loaded_node_provider   = 0
+vim.g.loaded_perl_provider   = 0
+vim.g.loaded_python3_provider = 0
+
 -- Display
 vim.opt.termguicolors  = true
 vim.opt.number         = true
@@ -63,3 +68,6 @@ end, 'eruby.yaml → yaml')
 
 -- Per-project .nvim.lua overrides (e.g. DAP configs for Vagrant)
 vim.opt.exrc = true
+
+-- Stop LSP log from growing unboundedly (default WARN still produces ~100MB+ logs)
+vim.lsp.set_log_level('OFF')
