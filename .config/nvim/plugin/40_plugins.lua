@@ -95,23 +95,8 @@ now(function()
   add({ 'https://github.com/neovim/nvim-lspconfig' })
 end)
 
+-- Core LSP: keymaps and server enable — isolated so mason/lazydev errors can't prevent LSP starting
 now_if_args(function()
-  add({
-    'https://github.com/williamboman/mason.nvim',
-    'https://github.com/folke/lazydev.nvim',
-  })
-
-  require('mason').setup()
-
-  -- lazydev: neovim API type annotations for Lua LSP completions
-  require('lazydev').setup({
-    library = {
-      { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
-    },
-  })
-
-  -- capabilities are set in 30_mini.lua via MiniCompletion.get_lsp_capabilities()
-
   Config.new_autocmd('LspAttach', nil, function(args)
     local buf = args.buf
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = buf, desc = 'Hover LSP information' })
@@ -138,6 +123,23 @@ now_if_args(function()
     'biome',
     'mdx_analyzer',
     'herb',
+  })
+end)
+
+-- Optional LSP tools: mason (server installer) + lazydev (Lua annotations)
+now_if_args(function()
+  add({
+    'https://github.com/williamboman/mason.nvim',
+    'https://github.com/folke/lazydev.nvim',
+  })
+
+  require('mason').setup()
+
+  -- lazydev: neovim API type annotations for Lua LSP completions
+  require('lazydev').setup({
+    library = {
+      { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+    },
   })
 end)
 

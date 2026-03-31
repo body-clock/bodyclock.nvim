@@ -1,10 +1,9 @@
--- ruby-lsp is installed as a gem (not via mason) so it respects the
--- project's Ruby version and bundler environment.
+-- ruby-lsp is installed as a user gem (not via mason) so it respects the
+-- project's Ruby version. Run directly — ruby-lsp handles bundler integration
+-- internally. Only use `bundle exec ruby-lsp` if ruby-lsp is in the project Gemfile.
 -- Install with: gem install ruby-lsp
---
--- BUNDLE_IGNORE_CONFIG prevents .bundle/config confusion in Vagrant projects.
 return {
-  cmd = { 'env', 'BUNDLE_IGNORE_CONFIG=1', 'bundle', 'exec', 'ruby-lsp' },
+  cmd = { 'ruby-lsp' },
   filetypes = { 'ruby' },
   root_markers = { 'Gemfile', '.git' },
   init_options = {

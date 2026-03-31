@@ -29,6 +29,7 @@ now_if_args(function()
       source_func = 'omnifunc',
       auto_setup = false,
     },
+    fallback_action = '',
   })
   -- Set omnifunc per-buffer when LSP attaches
   Config.new_autocmd('LspAttach', nil, function(args)
