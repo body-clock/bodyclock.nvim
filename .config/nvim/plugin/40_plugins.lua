@@ -152,17 +152,23 @@ end)
 
 later(function()
   add({ 'https://github.com/HiPhish/rainbow-delimiters.nvim' })
-  require('rainbow-delimiters.setup').setup({
-    highlight = {
-      'rainbowcol1',
-      'rainbowcol2',
-      'rainbowcol3',
-      'rainbowcol4',
-      'rainbowcol5',
-      'rainbowcol6',
-      'rainbowcol7',
-    },
-  })
+  require('rainbow-delimiters.setup').setup()
+
+  -- Link rainbow-delimiters to base16 accent colors via standard highlight groups
+  -- that tinted-nvim reliably maps: base08=Error, base09=Number, base0A=Type,
+  -- base0B=String, base0C=Special, base0D=Function, base0E=Statement.
+  -- Re-link on every ColorScheme so theme switches take effect immediately.
+  local function sync_rainbow_colors()
+    vim.api.nvim_set_hl(0, 'RainbowDelimiterRed', { link = 'Error' })
+    vim.api.nvim_set_hl(0, 'RainbowDelimiterOrange', { link = 'Number' })
+    vim.api.nvim_set_hl(0, 'RainbowDelimiterYellow', { link = 'Type' })
+    vim.api.nvim_set_hl(0, 'RainbowDelimiterGreen', { link = 'String' })
+    vim.api.nvim_set_hl(0, 'RainbowDelimiterCyan', { link = 'Special' })
+    vim.api.nvim_set_hl(0, 'RainbowDelimiterBlue', { link = 'Function' })
+    vim.api.nvim_set_hl(0, 'RainbowDelimiterViolet', { link = 'Statement' })
+  end
+  Config.new_autocmd('ColorScheme', nil, sync_rainbow_colors, 'Sync rainbow-delimiters to base16')
+  sync_rainbow_colors()
 end)
 
 later(function()
