@@ -1,6 +1,6 @@
 # bodyclock.nvim
 
-A focused Neovim config for Ruby/Rails development. Built on [lazy.nvim](https://github.com/folke/lazy.nvim), leaning heavily on [mini.nvim](https://github.com/echasnovski/mini.nvim) to keep the plugin count low.
+A focused Neovim config for Ruby/Rails development. Requires Neovim 0.12+. Uses the built-in `vim.pack` package manager and leans heavily on [mini.nvim](https://github.com/echasnovski/mini.nvim) to keep the plugin count low.
 
 ## Theming — tinty + base16 + tinted-nvim
 
@@ -8,7 +8,7 @@ The colour scheme is driven by [tinty](https://github.com/tinted-theming/tinty),
 
 **How it hooks into Neovim:**
 
-[tinted-nvim](https://github.com/tinted-theming/tinted-nvim) reads the current theme directly from tinty's state file and applies the 16 base16 colour variables as Neovim highlight groups. It uses [fwatch.nvim](https://github.com/rktjmp/fwatch.nvim) to watch the tinty state file for changes, so themes update live without restarting Neovim.
+[tinted-nvim](https://github.com/tinted-theming/tinted-nvim) reads the current theme directly from tinty's state file and applies the 16 base16 colour variables as Neovim highlight groups. It watches the tinty state file for changes, so themes update live without restarting Neovim.
 
 A `FocusGained` autocmd re-fires the `ColorScheme` event whenever Neovim regains focus, keeping plugins like gitsigns and rainbow-delimiters in sync after a theme switch that happened while Neovim was in the background.
 
@@ -45,7 +45,7 @@ Servers are configured via the native `vim.lsp` API. [mason.nvim](https://github
 **Via `:Mason`:** `stimulus_ls`, `ts_ls`, `lua_ls`, `harper_ls`, `yamlls`, `emmet_language_server`, `tailwindcss`, `biome`, `mdx_analyzer`, `marksman`
 
 **As gems** (must be available in PATH from your Ruby version manager, e.g. mise/rbenv):
-- `ruby-lsp` → `gem install ruby-lsp`. Started with `BUNDLE_IGNORE_CONFIG=1` to prevent it getting confused by `.bundle/config` in Vagrant projects.
+- `ruby-lsp` → `gem install ruby-lsp`. Run directly (not via `bundle exec`) — ruby-lsp handles bundler integration internally.
 - `herb-language-server` → `gem install herb-language-server` (ERB language server)
 
 | Key | Action |
@@ -56,9 +56,9 @@ Servers are configured via the native `vim.lsp` API. [mason.nvim](https://github
 | `<leader>ca` | Code action |
 | `<leader>rn` | Rename symbol |
 
-## Completion — blink.cmp
+## Completion — mini.completion
 
-Completion is handled by [blink.cmp](https://github.com/saghen/blink.cmp) with sources: LSP, path, snippets (via friendly-snippets), buffer, and lazydev for Lua. Default blink keymaps apply.
+Completion is handled by [mini.completion](https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-completion.md) via LSP omnifunc. Trigger with `<C-Space>` in insert mode, or let it auto-complete after a short delay.
 
 ## Formatting — conform.nvim
 
@@ -120,12 +120,10 @@ Gitsigns shows per-line git status in the sign column. Lazygit opens a full-scre
 | `<C-u>` | Half page up, centred |
 | `<C-d>` | Half page down, centred |
 
-## Buffers / quickfix
+## Quickfix
 
 | Key | Action |
 |---|---|
-| `<leader>bn` | Next buffer |
-| `<leader>bp` | Previous buffer |
 | `<leader>co` | Open quickfix |
 | `<leader>cc` | Close quickfix |
 | `<leader>cn` | Next quickfix item |
@@ -158,7 +156,10 @@ Live preview rendered in a browser via Deno.
 
 | Module | Purpose |
 |---|---|
+| Module | Purpose |
+|---|---|
 | mini.ai | Extended text objects (`daf`, `dif`, etc.) |
+| mini.completion | LSP completion via omnifunc |
 | mini.hipatterns | Highlight hex colours inline |
 | mini.icons | File icons throughout the UI |
 | mini.indentscope | Animated indent scope indicator |
