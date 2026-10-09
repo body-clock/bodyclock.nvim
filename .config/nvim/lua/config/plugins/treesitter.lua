@@ -1,34 +1,34 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
+		lazy = false,
 		build = ":TSUpdate",
 		config = function()
-			require("nvim-treesitter.configs").setup({
-				-- A list of parser names, or "all" (the listed parsers MUST always be installed)
-				ensure_installed = {
-					"c",
-					"lua",
-					"vim",
-					"vimdoc",
-					"query",
-					"markdown",
-					"markdown_inline",
-					"ruby",
-					"yaml",
-				},
-				auto_install = true,
-				highlight = {
-					enable = true,
-					disable = function(lang, buf)
-						local max_filesize = 100 * 1024 -- 100 KB
-						local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-						if ok and stats and stats.size > max_filesize then
-							return true
-						end
-					end,
-					additional_vim_regex_highlighting = false,
-				},
-				indent = { enable = true },
+			local treesitter = require("nvim-treesitter")
+			local languages = {
+				"c",
+				"lua",
+				"vim",
+				"vimdoc",
+				"query",
+				"markdown",
+				"markdown_inline",
+				"ruby",
+				"yaml",
+			}
+
+			treesitter.install(languages)
+
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = languages,
+				callback = function(args)
+					local stats = vim.uv.fs_stat(vim.api.nvim_buf_get_name(args.buf))
+					if not stats or stats.size <= 100 * 1024 then
+						vim.treesitter.start(args.buf)
+						vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+					end
+				end,
 			})
 		end,
 	},
