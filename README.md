@@ -8,7 +8,7 @@ The colour scheme is driven by [tinty](https://github.com/tinted-theming/tinty),
 
 **How it hooks into Neovim:**
 
-[tinted-nvim](https://github.com/tinted-theming/tinted-nvim) reads the current theme directly from tinty's state file and applies the 16 base16 colour variables as Neovim highlight groups. It uses [fwatch.nvim](https://github.com/rktjmp/fwatch.nvim) to watch the tinty state file for changes, so themes update live without restarting Neovim.
+[tinted-nvim](https://github.com/tinted-theming/tinted-nvim) reads the current theme directly from tinty's state file and applies the 16 base16 colour variables as Neovim highlight groups. It runs with `selector.watch = true`, so it watches that file itself and themes update live without restarting Neovim.
 
 A `FocusGained` autocmd re-fires the `ColorScheme` event whenever Neovim regains focus, keeping plugins like gitsigns and rainbow-delimiters in sync after a theme switch that happened while Neovim was in the background.
 

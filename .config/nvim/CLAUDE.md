@@ -11,7 +11,7 @@ A Neovim configuration for Ruby/Rails development, built on lazy.nvim with heavy
 **init.lua** is 4 lines — it loads in order:
 1. `lua/config/options.lua` — core vim options
 2. `lua/config/lazy.lua` — lazy.nvim bootstrap + plugin discovery
-3. `lua/config/keymaps.lua` — all keybindings
+3. `lua/config/keymaps.lua` — global editor keymaps (not plugin keymaps — see below)
 4. `lua/config/autocmds.lua` — autocommands
 
 **Plugin declarations** live in `lua/config/plugins/` (one file per plugin/group). lazy.nvim auto-discovers them via `{ import = "config.plugins" }`.
@@ -20,17 +20,18 @@ A Neovim configuration for Ruby/Rails development, built on lazy.nvim with heavy
 
 ## Key conventions
 
+- **Plugin keymaps go in the plugin spec**, as a `keys = { … }` table inside `lua/config/plugins/*.lua` — not in `keymaps.lua`. lazy.nvim defers loading until the key is pressed. `keymaps.lua` is only for global editor keys that belong to no plugin.
 - **No mason-lspconfig** — servers enabled explicitly via `vim.lsp.enable()` for clarity
 - **ruby-lsp and herb installed as gems**, not via Mason — so they respect project Ruby version
 - `ruby-lsp` runs with `BUNDLE_IGNORE_CONFIG=1 bundle exec ruby-lsp` for Vagrant compatibility
 - **No LuaSnip** — blink.cmp handles snippets natively via friendly-snippets
-- **No transparent.nvim** — transparency handled by ~10 lines in autocmds.lua
+- **No transparent.nvim** — transparency is ~20 lines in `plugins/colorscheme.lua`, with `<leader>tt` to toggle it
 - **mini.pick over telescope** — keymaps use `MiniPick` and `MiniExtra.pickers`
 - `vim.opt.exrc = true` enables per-project `.nvim.lua` files (used to override DAP configs)
 
 ## Theming (tinty + tinted-nvim)
 
-tinted-nvim reads tinty's state file and applies base16 colors. fwatch.nvim watches that file for live reloads. A `FocusGained` autocmd re-fires `ColorScheme` to keep gitsigns/rainbow-delimiters in sync after background theme switches.
+tinted-nvim reads tinty's state file (`~/.local/share/tinted-theming/tinty/current_scheme`) and applies base16 colors. It is configured with `selector.watch = true`, so it reloads that file itself when tinty switches scheme — there is no fwatch.nvim. A `FocusGained` autocmd re-fires `ColorScheme` to keep gitsigns/rainbow-delimiters in sync after background theme switches.
 
 The rainbow-delimiters plugin uses highlight groups `rainbowcol1`–`rainbowcol7`, which are defined by tinted-nvim.
 
@@ -48,4 +49,4 @@ Configured in `lua/config/plugins/dap.lua`. Ruby uses rdbg and supports both loc
 
 Per-project DAP config goes in `.nvim.lua` at the project root (enabled by `exrc`). A Vagrant template is at `templates/vagrant-project.nvim.lua`.
 
-Key DAP keymaps: `<leader>db` breakpoint, `<leader>dc` continue, `<leader>dn/i/o` step next/in/out, `<leader>dq` terminate, `<leader>du` UI toggle.
+Key DAP keymaps: `<leader>db` breakpoint, `<leader>dc` continue, `<leader>dn/i/o` step next/in/out, `<leader>dq` terminate, `<leader>du` UI toggle, `<leader>ds`/`<leader>dl` debug the current RSpec file/line.
