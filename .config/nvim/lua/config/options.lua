@@ -19,3 +19,7 @@ vim.opt.conceallevel = 0
 
 -- Window options
 vim.wo.wrap = true
+
+-- Load per-project .nvim.lua files (used for DAP launch configs, etc.)
+vim.opt.exrc = true
+vim.opt.secure = true
