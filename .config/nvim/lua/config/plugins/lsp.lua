@@ -7,13 +7,6 @@ return {
 		end,
 	},
 	{
-		"williamboman/mason-lspconfig.nvim",
-		lazy = false,
-		opts = {
-			auto_install = true,
-		},
-	},
-	{
 		"neovim/nvim-lspconfig",
 		lazy = false,
 		dependencies = {
@@ -28,45 +21,40 @@ return {
 			},
 		},
 		config = function()
-			local servers = {
-				-- BUNDLE_IGNORE_CONFIG prevents ruby-lsp from being confused by
-				-- .bundle/config in vagrant projects (e.g. vendor/bundle paths).
-				-- Safe for normal projects which don't have a .bundle/config.
-				ruby_lsp = {
-					cmd = { "env", "BUNDLE_IGNORE_CONFIG=1", "ruby-lsp" },
-				},
-				stimulus_ls = {},
-				ts_ls = {},
-				marksman = {},
-				lua_ls = {},
-				harper_ls = {
-					settings = {
-						["harper-ls"] = {
-							linters = {
-								SpellCheck = true,
-								SentenceCapitalization = false,
-								LongSentences = false,
-								ToDoHyphen = false,
-							},
-						},
-					},
-				},
-				yamlls = {},
-				emmet_language_server = {},
-				tailwindcss = {},
-				biome = {},
-				mdx_analyzer = {},
-				herb = {},
-			}
-
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
 
-			for server, opts in pairs(servers) do
-				vim.lsp.enable(server)
-				opts.capabilities = capabilities
-				vim.lsp.config(server, opts)
-			end
+			vim.lsp.config("*", { capabilities = capabilities })
+
+			vim.api.nvim_create_autocmd("LspAttach", {
+				callback = function(args)
+					local buf = args.buf
+					vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = buf, desc = "Hover LSP information" })
+					vim.keymap.set("n", "gd", function()
+						require("mini.extra").pickers.lsp({ scope = "definition" })
+					end, { buffer = buf, desc = "[g]o to [d]efinition" })
+					vim.keymap.set("n", "gr", function()
+						require("mini.extra").pickers.lsp({ scope = "references" })
+					end, { buffer = buf, desc = "[g]o to [r]eference" })
+					vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = buf, desc = "Code action" })
+					vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = buf, desc = "Rename under cursor" })
+				end,
+			})
+
+			vim.lsp.enable({
+				"ruby_lsp",
+				"stimulus_ls",
+				"ts_ls",
+				"marksman",
+				"lua_ls",
+				"harper_ls",
+				"yamlls",
+				"emmet_language_server",
+				"tailwindcss",
+				"biome",
+				"mdx_analyzer",
+				"herb",
+			})
 		end,
 	},
 }
